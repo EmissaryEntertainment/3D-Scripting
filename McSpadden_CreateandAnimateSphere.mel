@@ -1,0 +1,62 @@
+//Create a ball that bounces
+
+//Create a plane
+polyPlane -w 10 -h 10 -sx 10 -sy 10 -ax 0 1 0 -createUVs 2 -ch 1 -n Ground;
+
+setAttr "Ground.scaleX" 30;
+setAttr "Ground.scaleY" 1;
+setAttr "Ground.scaleZ" 30;
+
+//Create a ball
+polySphere -r 5 -sx 20 -sy 20 -ax 0 1 0 -createUVs 2 -ch 1 -n "Jeff";
+
+snapMode -point (!`snapMode -q -point`);
+move 0 -5 0 Jeff.scalePivot Jeff.rotatePivot;
+
+//Set timeline to 1-50
+playbackOptions -animationStartTime 0 -minTime 1 -maxTime 50 -animationEndTime 51;
+
+//Rewind the time
+currentTime 1;
+
+//Set position of Jeff at Frame 1
+setAttr "Jeff.translateX" -15;
+setAttr "Jeff.translateY" 10;
+setAttr "Jeff.translateZ" 0;
+
+//Record position of Jeff
+setKeyframe "Jeff.tx";
+setKeyframe "Jeff.ty";
+setKeyframe "Jeff.tz";
+
+//Set to frame 50
+currentTime 25;
+
+//Set position of Jeff at Frame 25
+setAttr "Jeff.translateX" 0;
+setAttr "Jeff.translateY" 5;
+setAttr "Jeff.translateZ" 0;
+
+//Record position of Jeff
+setKeyframe "Jeff.tx";
+setKeyframe "Jeff.ty";
+setKeyframe "Jeff.tz";
+
+//Set to frame 50
+currentTime 50;
+
+//Set position of Jeff at Frame 50
+setAttr "Jeff.translateX" 15;
+setAttr "Jeff.translateY" 10;
+setAttr "Jeff.translateZ" 0;
+
+//Record position of Jeff
+setKeyframe "Jeff.tx";
+setKeyframe "Jeff.ty";
+setKeyframe "Jeff.tz";
+
+//Rewind back to frame 1
+currentTime 1;
+
+//Clear selection
+select -cl;
