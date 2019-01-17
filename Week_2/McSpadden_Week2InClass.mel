@@ -1,0 +1,22 @@
+//Reference 1
+polySphere -sx 20 -sy 20 -r 20 -n "Ball";
+
+//Query radius new sphere
+float $r = `polySphere -q -sx Ball`;
+
+//Change name based on selection
+select -r Ball;
+rename Jeff;
+
+//Change name only if you know the current name of the object
+rename Jeff Ball;
+
+//Example
+polySphere -r 5
+-sx 10
+-sy 10
+-ax 0 1 0
+-createUVs 1
+-name "Bob";
+
+setAttr "Bob.translateX" 10;
