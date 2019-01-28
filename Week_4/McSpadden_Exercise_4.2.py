@@ -1,0 +1,11 @@
+#TRUE AND FALSE
+print(5>3)
+print(5<3)
+print("Steve" == "Steve")
+print("Steve" == "Joe")
+print(3 == 3)
+print(True == True)
+print(True == False)
+print(False == False)
+print(10<=9.9)
+print("Jim" == "Jon")
