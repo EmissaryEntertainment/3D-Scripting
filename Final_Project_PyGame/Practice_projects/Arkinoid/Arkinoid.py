@@ -20,7 +20,7 @@ def paddleimage(spritesheet):
 
 class Spritesheet:
     def __init__(self, filename):
-        self.sheet = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/data", filename)).convert()
+        self.sheet = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Arkinoid/data", filename)).convert()
     def imgat(self, rect, colorkey = None):
         rect = Rect(rect)
         image = pygame.Surface(rect.size).convert()
