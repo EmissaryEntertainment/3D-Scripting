@@ -15,7 +15,7 @@ class Level():
 
     # How far this world has been scrolled to the left/right
     world_shift = 0
-    level_limit = -1000
+    level_limit = -1500
 
     # constructor to create our lists
     def __init__(self, player):
@@ -60,7 +60,7 @@ class Level_01(Level):
         # Limit for how far a level can scroll
         self.background = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Platformer_Test_With_Sprites", "Background.png")).convert()
         self.background.set_colorkey(Constants.white)
-        self.level_limit = -1000
+        self.level_limit = -1500
 
         # Create array with type of platform, and x,y position of the platform
         level = [[platforms.purple_diamond,250,500],

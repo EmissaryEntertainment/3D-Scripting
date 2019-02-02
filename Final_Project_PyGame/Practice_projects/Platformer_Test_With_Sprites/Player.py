@@ -30,19 +30,19 @@ class create_player(pygame.sprite.Sprite):
         sprite_sheet = Spritesheet("Character.png")
 
         # Load all right facing images into the list
-        image = sprite_sheet.get_image(0,237,68,105)
+        image = sprite_sheet.get_image(3,106,36,73)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(87,237,72,101)
+        image = sprite_sheet.get_image(75,103,41,80)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(171,239,68,100)
+        image = sprite_sheet.get_image(143,106,49,75)
         self.walking_frames_r.append(image)
 
         # Load all left facing images into the other list
-        image = sprite_sheet.get_image(0,117,71,102)
+        image = sprite_sheet.get_image(0,3,51,74)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(93,119,59,103)
+        image = sprite_sheet.get_image(78,0,41,80)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(177,122,59,97)
+        image = sprite_sheet.get_image(154,4,36,73)
         self.walking_frames_l.append(image)
 
         # Set the image the player starts with
