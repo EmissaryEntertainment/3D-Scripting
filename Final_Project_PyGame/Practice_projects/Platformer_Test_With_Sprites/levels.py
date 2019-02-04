@@ -2,6 +2,7 @@ import os, pygame
 
 import Constants
 import platforms
+import enemies
 
 class Level():
     # Base class for all rooms
@@ -61,6 +62,16 @@ class Level_01(Level):
         self.background = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Platformer_Test_With_Sprites", "Background.png")).convert()
         self.background.set_colorkey(Constants.white)
         self.level_limit = -1500
+        self.enemy = enemies.create_enemy()
+        self.enemy.rect.x = 250
+        self.enemy.rect.y = 499
+        self.enemy.level = self
+        self.enemy_list.add(self.enemy)
+        self.enemy = enemies.create_enemy()
+        self.enemy.rect.x = 550
+        self.enemy.rect.y = 399
+        self.enemy.level = self
+        self.enemy_list.add(self.enemy)
 
         # Create array with type of platform, and x,y position of the platform
         level = [[platforms.purple_diamond,250,500],
@@ -72,3 +83,6 @@ class Level_01(Level):
             block.rect.y = platform[2]
             block.player = self.player
             self.platform_list.add(block)
+
+    def get_enemy_list(self):
+        return self.enemy_list
