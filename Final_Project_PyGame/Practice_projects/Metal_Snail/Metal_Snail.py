@@ -6,7 +6,7 @@ import levels
 
 import Constants
 
-import bullet
+import spells
 
 import enemies
 
@@ -19,7 +19,7 @@ def main():
     screen = pygame.display.set_mode(size)
 
     # Set the name of the game window
-    pygame.display.set_caption("Test")
+    pygame.display.set_caption("Metal_Snail")
 
     # Create the player
     player = create_player()
@@ -64,7 +64,7 @@ def main():
                     player.jump()
                 elif event.key == pygame.K_f:
                     # Fire a firebolt if the user clicks the mouse button
-                    firebolt = bullet.Bullet()
+                    firebolt = spells.Firebolt()
                     # Set the firebolt so it is where the player is, and so it shoots the same direction as the player
                     if player.get_direction() == "R":
                         firebolt.rect.x = player.rect.x + 25
@@ -89,12 +89,17 @@ def main():
         for firebolt in firebolt_list:
 
             # See if it hit a block
-            block_hit_list = pygame.sprite.spritecollide(firebolt, enemy_sprite_list, True)
+            block_hit_list = pygame.sprite.spritecollide(firebolt, enemy_sprite_list, False)
 
-            # For each block hit, remove the firebolt and add to the score
+            # When a firebolt hits an enemy deduct the enemies health based on the firebolts damage
             for block in block_hit_list:
+                block.take_damage(firebolt.get_damage())
                 firebolt_list.remove(firebolt)
-                enemy_sprite_list.remove(firebolt)
+                active_sprite_list.remove(firebolt)
+                if block.get_health() <= 0:
+                    enemy_sprite_list.remove(block)
+                    active_sprite_list.remove(block)
+                    current_level.get_enemy_list().remove(block)
 
                 # Remove the firebolt if it flies up off the screen
             if firebolt.rect.x < -10:
@@ -106,6 +111,7 @@ def main():
 
         # if the player gets near the right side, shift the world left (-x)
         current_position = player.rect.x + current_level.world_shift
+        print(current_position)
         if player.rect.x >= 500 and shift == True:
             diff = player.rect.x - 500
             if current_position < current_level.level_limit:

@@ -51,6 +51,8 @@ class create_enemy(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+        self.health = 3
+
     # Find new position for the Player
     def update(self):
         #Gravity
@@ -103,3 +105,9 @@ class create_enemy(pygame.sprite.Sprite):
             self.counter = 0
 
         self.counter += 1
+
+    def get_health(self):
+        return self.health
+
+    def take_damage(self,damage):
+        self.health -= damage

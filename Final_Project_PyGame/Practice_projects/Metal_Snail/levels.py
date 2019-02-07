@@ -59,9 +59,9 @@ class Level_01(Level):
         Level.__init__(self,player)
 
         # Limit for how far a level can scroll
-        self.background = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Platformer_Test_With_Sprites", "Background.png")).convert()
+        self.background = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Metal_Snail", "Background.png")).convert()
         self.background.set_colorkey(Constants.white)
-        self.level_limit = -1500
+        self.level_limit = -6050
         self.enemy = enemies.create_enemy()
         self.enemy.rect.x = 250
         self.enemy.rect.y = 499
