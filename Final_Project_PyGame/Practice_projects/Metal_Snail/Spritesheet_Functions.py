@@ -1,6 +1,6 @@
 # Used to pull sprites out of spritesheets
 
-import os, pygame
+import os, pygame, sys
 
 import Constants
 
@@ -12,7 +12,8 @@ class Spritesheet(object):
         # Pass in the file name of the spritesheet
 
         # Load sheet
-        self.sprite_sheet = pygame.image.load(os.path.join("C:/School/11th Quarter/3D Scripting/3D-Scripting/Final_Project_PyGame/Practice_projects/Metal_Snail", filename)).convert_alpha()
+        directory_name = (sys.path[0] + "\Assets")
+        self.sprite_sheet = pygame.image.load(os.path.join(directory_name, filename)).convert_alpha()
 
     def get_image(self,x,y,width,height):
         # Grab single image from the sheet

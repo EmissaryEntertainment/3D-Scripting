@@ -50,6 +50,8 @@ class create_player(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+        self.health = 100
+
     # Find new position for the Player
     def update(self):
         #Gravity
@@ -129,3 +131,9 @@ class create_player(pygame.sprite.Sprite):
 
     def get_direction(self):
         return self.direction
+
+    def get_health(self):
+        return self.health
+
+    def take_damage(self,damage):
+        self.health -= damage

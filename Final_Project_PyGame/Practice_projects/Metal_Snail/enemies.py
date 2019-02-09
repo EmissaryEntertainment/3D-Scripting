@@ -12,6 +12,7 @@ class create_enemy(pygame.sprite.Sprite):
     change_y = 0
     counter = 0
 
+
     # Store the images for the player animation
     walking_frames_r = []
     walking_frames_l = []
@@ -26,7 +27,6 @@ class create_enemy(pygame.sprite.Sprite):
     def __init__(self):
         #call the parents constructor
         pygame.sprite.Sprite.__init__(self)
-
         # Load spritesheet
         sprite_sheet = Spritesheet("Character.png")
 
@@ -111,3 +111,6 @@ class create_enemy(pygame.sprite.Sprite):
 
     def take_damage(self,damage):
         self.health -= damage
+
+    def get_direction(self):
+        return self.direction

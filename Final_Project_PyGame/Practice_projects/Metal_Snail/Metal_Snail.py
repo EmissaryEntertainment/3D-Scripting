@@ -10,16 +10,20 @@ import spells
 
 import enemies
 
+import time
+
 def main():
     # Main program
     pygame.init()
 
+    score = 0
     # Set height and width of screen
     size = [Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
 
     # Set the name of the game window
     pygame.display.set_caption("Metal_Snail")
+    font = pygame.font.Font("freesansbold.ttf",30)
 
     # Create the player
     player = create_player()
@@ -36,14 +40,16 @@ def main():
     active_sprite_list = pygame.sprite.Group()
     enemy_sprite_list = pygame.sprite.Group()
     firebolt_list = pygame.sprite.Group()
+    enemy_firebolt_list = pygame.sprite.Group()
+    player_list = pygame.sprite.Group()
     player.level = current_level
 
     player.rect.x = 1
     player.rect.y = Constants.SCREEN_HEIGHT - player.rect.height
     active_sprite_list.add(player)
+    player_list.add(player)
     active_sprite_list.add(current_level.get_enemy_list())
     enemy_sprite_list.add(current_level.get_enemy_list())
-
 
     clock = pygame.time.Clock()
 
@@ -84,19 +90,44 @@ def main():
 
         # Update the player
         active_sprite_list.update()
+        for enemy in enemy_sprite_list:
+            enemy_firebolt = spells.Enemy_Firebolt()
+            if enemy.get_direction() == "R":
+                enemy_firebolt.rect.x = enemy.rect.x + 25
+                enemy_firebolt.rect.y = enemy.rect.y + 25
+                enemy_firebolt.shoot_right()
+            elif enemy.get_direction() == "L":
+                enemy_firebolt.rect.x = enemy.rect.x - 25
+                enemy_firebolt.rect.y = enemy.rect.y + 25
+                enemy_firebolt.shoot_left()
+            active_sprite_list.add(enemy_firebolt)
+            enemy_firebolt_list.add(enemy_firebolt)
+
+        # Calculate mechanics for enemy firebolts
+        for firebolt in enemy_firebolt_list:
+            # See if it hit the player
+            block_hit_list = pygame.sprite.spritecollide(firebolt, player_list, False)
+            # When a firebolt hits the player deduct the players health based on the firebolts damage
+            for block in block_hit_list:
+                block.take_damage(firebolt.get_damage())
+                enemy_firebolt_list.remove(firebolt)
+                active_sprite_list.remove(firebolt)
+                if block.get_health() <= 0:
+                    enemy_sprite_list.remove(block)
+                    active_sprite_list.remove(block)
+                    player_list.remove(player_list)
 
         # Calculate mechanics for each firebolt
         for firebolt in firebolt_list:
-
             # See if it hit a block
             block_hit_list = pygame.sprite.spritecollide(firebolt, enemy_sprite_list, False)
-
             # When a firebolt hits an enemy deduct the enemies health based on the firebolts damage
             for block in block_hit_list:
                 block.take_damage(firebolt.get_damage())
                 firebolt_list.remove(firebolt)
                 active_sprite_list.remove(firebolt)
                 if block.get_health() <= 0:
+                    score += 100
                     enemy_sprite_list.remove(block)
                     active_sprite_list.remove(block)
                     current_level.get_enemy_list().remove(block)
@@ -111,7 +142,6 @@ def main():
 
         # if the player gets near the right side, shift the world left (-x)
         current_position = player.rect.x + current_level.world_shift
-        print(current_position)
         if player.rect.x >= 500 and shift == True:
             diff = player.rect.x - 500
             if current_position < current_level.level_limit:
@@ -137,9 +167,18 @@ def main():
         # ALL CODE FOR DRAWING THE LEVEL GOES BELOW THIS LINE
         current_level.draw(screen)
         active_sprite_list.draw(screen)
+        text_surface = font.render("Health: " + str(player.get_health()), True, Constants.black)
+        TextRect = text_surface.get_rect()
+        TextRect.center = (90,20)
+        screen.blit(text_surface,TextRect)
+        text_surface = font.render("Score: " + str(score), True, Constants.black)
+        TextRect = text_surface.get_rect()
+        TextRect.center = (650,20)
+        screen.blit(text_surface,TextRect)
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
         pygame.display.flip()
+        pygame.display.update()
 
         # Limits the fps of the game
         clock.tick(60)
