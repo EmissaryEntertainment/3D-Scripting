@@ -1,4 +1,4 @@
-import os, pygame
+import os, pygame, sys
 
 from Player import create_player
 
@@ -23,7 +23,8 @@ def main():
 
     # Set the name of the game window
     pygame.display.set_caption("Metal_Snail")
-    font = pygame.font.Font("freesansbold.ttf",30)
+    directory_name = (sys.path[0] + "\Assets")
+    font = pygame.font.Font(os.path.join(directory_name, "Romulus.ttf"),40)
 
     # Create the player
     player = create_player()
@@ -31,7 +32,7 @@ def main():
     # Create the levels
     level_list = []
     level_list.append(levels.Level_01(player))
-    level_list.append(levels.Level_01(player))
+    level_list.append(levels.Level_02(player))
 
     # Set the current level
     current_level_number = 0
@@ -62,13 +63,13 @@ def main():
                 done = True
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_a:
                     player.move_left()
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_d:
                     player.move_right()
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_SPACE:
                     player.jump()
-                elif event.key == pygame.K_f:
+                elif event.key == pygame.K_RETURN:
                     # Fire a firebolt if the user clicks the mouse button
                     firebolt = spells.Firebolt()
                     # Set the firebolt so it is where the player is, and so it shoots the same direction as the player
@@ -85,7 +86,7 @@ def main():
                     firebolt_list.add(firebolt)
 
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_a or event.key == pygame.K_d:
                     player.stop()
 
         # Update the player
@@ -117,7 +118,7 @@ def main():
                     active_sprite_list.remove(block)
                     player_list.remove(player_list)
 
-        # Calculate mechanics for each firebolt
+        # Calculate mechanics for player firebolt
         for firebolt in firebolt_list:
             # See if it hit a block
             block_hit_list = pygame.sprite.spritecollide(firebolt, enemy_sprite_list, False)

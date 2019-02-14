@@ -60,7 +60,7 @@ class Level_01(Level):
 
         # Limit for how far a level can scroll
         directory_name = (sys.path[0] + "\Assets")
-        self.background = pygame.image.load(os.path.join(directory_name,"Background.png" )).convert()
+        self.background = pygame.image.load(os.path.join(directory_name,"Background_Level_1.png" )).convert()
         self.background.set_colorkey(Constants.white)
         self.level_limit = -6050
         self.enemy = enemies.create_enemy()
@@ -77,6 +77,42 @@ class Level_01(Level):
         # Create array with type of platform, and x,y position of the platform
         level = [[platforms.purple_diamond,250,500],
                  [platforms.concrete,550,400]]
+
+        for platform in level:
+            block = platforms.Platform(platform[0])
+            block.rect.x = platform[1]
+            block.rect.y = platform[2]
+            block.player = self.player
+            self.platform_list.add(block)
+
+    def get_enemy_list(self):
+        return self.enemy_list
+
+    def get_player(self):
+        return self.player
+
+class Level_02(Level):
+    def __init__(self, player):
+
+        Level.__init__(self,player)
+
+        directory_name = (sys.path[0] + "\Assets")
+        self.background = pygame.image.load(os.path.join(directory_name, "Background_Level_2.png")).convert()
+        self.background.set_colorkey(Constants.white)
+        self.level_limit = -6050
+        self.enemy = enemies.create_enemy()
+        self.enemy.rect.x = 300
+        self.enemy.rect.y = 299
+        self.enemy.level = self
+        self.enemy_list.add(self.enemy)
+        self.enemy = enemies.create_enemy()
+        self.enemy.rect.x = 400
+        self.enemy.rect.y = 449
+        self.enemy.level = self
+        self.enemy_list.add(self.enemy)
+
+
+        level = [[platforms.cracked_wall, 300, 300], [platforms.grey_crack, 400, 450]]
 
         for platform in level:
             block = platforms.Platform(platform[0])
