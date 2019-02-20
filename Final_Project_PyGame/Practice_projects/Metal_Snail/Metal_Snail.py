@@ -15,6 +15,7 @@ import time
 def main():
     # Main program
     pygame.init()
+    timer = 0
 
     score = 0
     # Set height and width of screen
@@ -91,18 +92,25 @@ def main():
 
         # Update the player
         active_sprite_list.update()
-        for enemy in enemy_sprite_list:
-            enemy_firebolt = spells.Enemy_Firebolt()
-            if enemy.get_direction() == "R":
-                enemy_firebolt.rect.x = enemy.rect.x + 25
-                enemy_firebolt.rect.y = enemy.rect.y + 25
-                enemy_firebolt.shoot_right()
-            elif enemy.get_direction() == "L":
-                enemy_firebolt.rect.x = enemy.rect.x - 25
-                enemy_firebolt.rect.y = enemy.rect.y + 25
-                enemy_firebolt.shoot_left()
-            active_sprite_list.add(enemy_firebolt)
-            enemy_firebolt_list.add(enemy_firebolt)
+
+
+        timer += 1
+        if timer >= 50:
+            for enemy in enemy_sprite_list:
+                enemy_firebolt = spells.Enemy_Firebolt()
+                if enemy.get_direction() == "R":
+                    enemy_firebolt.rect.x = enemy.rect.x + 25
+                    enemy_firebolt.rect.y = enemy.rect.y + 25
+                    enemy_firebolt.shoot_right()
+                    timer = 0
+                elif enemy.get_direction() == "L":
+                    enemy_firebolt.rect.x = enemy.rect.x - 25
+                    enemy_firebolt.rect.y = enemy.rect.y + 25
+                    enemy_firebolt.shoot_left()
+                    timer = 0
+                active_sprite_list.add(enemy_firebolt)
+                enemy_firebolt_list.add(enemy_firebolt)
+
 
         # Calculate mechanics for enemy firebolts
         for firebolt in enemy_firebolt_list:

@@ -8,7 +8,7 @@ class Firebolt(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         directory_name = (sys.path[0] + "\Assets")
-        self.image = pygame.image.load(os.path.join(directory_name, "Firebolt.png")).convert_alpha()
+        self.image = pygame.image.load(os.path.join(directory_name, "PlayerFirebolt.png")).convert_alpha()
 
         self.shoot_speed = 0
 
@@ -36,7 +36,7 @@ class Enemy_Firebolt(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         directory_name = (sys.path[0] + "\Assets")
-        self.image = pygame.image.load(os.path.join(directory_name, "Enemy_Firebolt.png")).convert_alpha()
+        self.image = pygame.image.load(os.path.join(directory_name, "EnemyFirebolt.png")).convert_alpha()
 
         self.shoot_speed = 0
 
@@ -49,9 +49,13 @@ class Enemy_Firebolt(pygame.sprite.Sprite):
         self.rect.x += self.shoot_speed
 
     def shoot_right(self):
+        directory_name = (sys.path[0] + "\Assets")
+        self.image = pygame.image.load(os.path.join(directory_name, "EnemyFirebolt.png")).convert_alpha()
         self.shoot_speed = 5
 
     def shoot_left(self):
+        directory_name = (sys.path[0] + "\Assets")
+        self.image = pygame.transform.flip(pygame.image.load(os.path.join(directory_name, "EnemyFirebolt.png")).convert_alpha(), True,False)
         self.shoot_speed = -5
 
     def get_damage(self):

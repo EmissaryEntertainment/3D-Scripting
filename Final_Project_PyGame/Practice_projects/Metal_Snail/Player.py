@@ -27,23 +27,18 @@ class create_player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         # Load spritesheet
-        sprite_sheet = Spritesheet("Character.png")
+        sprite_sheet = Spritesheet("HeroWalk.png")
 
         # Load all right facing images into the list
-        image = sprite_sheet.get_image(3,106,36,73)
+        image = sprite_sheet.get_image(0,0,102,129)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(75,103,41,80)
+        self.walking_frames_l.append(pygame.transform.flip(image, True, False))
+        image = sprite_sheet.get_image(737,0,102,127)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(143,106,49,75)
+        self.walking_frames_l.append(pygame.transform.flip(image, True, False))
+        image = sprite_sheet.get_image(840,127,105,126)
         self.walking_frames_r.append(image)
-
-        # Load all left facing images into the other list
-        image = sprite_sheet.get_image(0,3,51,74)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(78,0,41,80)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(154,4,36,73)
-        self.walking_frames_l.append(image)
+        self.walking_frames_l.append(pygame.transform.flip(image, True, False))
 
         # Set the image the player starts with
         self.image = self.walking_frames_r[0]

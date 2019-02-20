@@ -63,20 +63,20 @@ class Level_01(Level):
         self.background = pygame.image.load(os.path.join(directory_name,"Background_Level_1.png" )).convert()
         self.background.set_colorkey(Constants.white)
         self.level_limit = -6050
-        self.enemy = enemies.create_enemy()
+        self.enemy = enemies.create_monk_enemy()
         self.enemy.rect.x = 250
-        self.enemy.rect.y = 499
+        self.enemy.rect.y = 400
         self.enemy.level = self
         self.enemy_list.add(self.enemy)
-        self.enemy = enemies.create_enemy()
-        self.enemy.rect.x = 550
+        self.enemy = enemies.create_fire_enemy()
+        self.enemy.rect.x = 750
         self.enemy.rect.y = 399
         self.enemy.level = self
         self.enemy_list.add(self.enemy)
 
         # Create array with type of platform, and x,y position of the platform
         level = [[platforms.purple_diamond,250,500],
-                 [platforms.concrete,550,400]]
+                 [platforms.concrete,750,400]]
 
         for platform in level:
             block = platforms.Platform(platform[0])
@@ -100,14 +100,14 @@ class Level_02(Level):
         self.background = pygame.image.load(os.path.join(directory_name, "Background_Level_2.png")).convert()
         self.background.set_colorkey(Constants.white)
         self.level_limit = -6050
-        self.enemy = enemies.create_enemy()
+        self.enemy = enemies.create_fire_enemy()
         self.enemy.rect.x = 300
-        self.enemy.rect.y = 299
+        self.enemy.rect.y = 301
         self.enemy.level = self
         self.enemy_list.add(self.enemy)
-        self.enemy = enemies.create_enemy()
+        self.enemy = enemies.create_fire_enemy()
         self.enemy.rect.x = 400
-        self.enemy.rect.y = 449
+        self.enemy.rect.y = 451
         self.enemy.level = self
         self.enemy_list.add(self.enemy)
 
