@@ -61,6 +61,9 @@ class Level_01(Level):
         # Limit for how far a level can scroll
         directory_name = (sys.path[0] + "\Assets")
         self.background = pygame.image.load(os.path.join(directory_name,"Background_Level_1.png" )).convert()
+        pygame.mixer.music.load(os.path.join(directory_name, "Level1.mp3"))
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(1)
         self.background.set_colorkey(Constants.white)
         self.level_limit = -6050
         self.enemy = enemies.create_monk_enemy()
@@ -126,3 +129,9 @@ class Level_02(Level):
 
     def get_player(self):
         return self.player
+
+    def play_audio(self):
+        directory_name = (sys.path[0] + "\Assets")
+        pygame.mixer.music.load(os.path.join(directory_name, "BFGDivision.mp3"))
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(1)

@@ -169,6 +169,7 @@ def main():
                 current_level_number += 1
                 current_level = level_list[current_level_number]
                 player.level = current_level
+                current_level.play_audio()
                 active_sprite_list.add(current_level.get_enemy_list())
                 enemy_sprite_list.add(current_level.get_enemy_list())
                 shift = True
